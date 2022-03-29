@@ -1,9 +1,6 @@
 const output=document.getElementById("atsakymasin");
 const btSkaiciuotiCm=document.getElementById("skaiciuoticm");
 let inCm = <HTMLInputElement> document.getElementById("var_cm");
- 
-
-
 
 interface Centimeters{
     x:number
