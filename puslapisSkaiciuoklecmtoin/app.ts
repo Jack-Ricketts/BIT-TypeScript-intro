@@ -2,21 +2,16 @@ const output=document.getElementById("atsakymasin");
 const btSkaiciuotiCm=document.getElementById("skaiciuoticm");
 let inCm = <HTMLInputElement> document.getElementById("var_cm");
 
-interface Centimeters{
-    x:number
+let cm:number
+
+const vertimas=(cm)=>{
+    return cm * 0.393701;
 }
 
-const vertimas=(p:Centimeters)=>{
-    return p.x * 0.393701;
-}
-
-let atsakymas:Centimeters={
-    x:1
-}
 const fSuskaiciuotiCm=()=>{ 
-    atsakymas.x=+inCm.value;
+    cm=+inCm.value;
     if (output!=null){
-        output.innerHTML=vertimas(atsakymas) + " in";
+        output.innerHTML=vertimas(cm) + " in";
     }
 }
 
