@@ -6,7 +6,7 @@ interface Centimeters{
     x:number
 }
 
-const distance=(p:Centimeters)=>{
+const vertimas=(p:Centimeters)=>{
     return p.x * 0.393701;
 }
 
@@ -16,7 +16,7 @@ let atsakymas:Centimeters={
 const fSuskaiciuotiCm=()=>{ 
     atsakymas.x=+inCm.value;
     if (output!=null){
-        output.innerHTML=distance(atsakymas) + " in";
+        output.innerHTML=vertimas(atsakymas) + " in";
     }
 }
 
