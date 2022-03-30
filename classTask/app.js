@@ -17,7 +17,7 @@ class Point {
         this._y = y;
     }
     distanceFromOrigin() {
-        return Math.sqrt(this._x * this._x + this._y * this._y);
+        return Math.sqrt(this._x ** 2 + this._y ** 2);
     }
     translate(x, y) {
         this._x += x;
@@ -27,7 +27,7 @@ class Point {
         console.log('[' + this._x + ';' + this._y + ']');
     }
     distance(p) {
-        return Math.sqrt((p.x - this._x) * (p.x - this._x) + (p.y - this._y) * (p.y - this._y));
+        return Math.sqrt((p.x - this._x) ** 2 + (p.y - this._y) ** 2);
         // 8.12 this.x yra p1
     }
 }

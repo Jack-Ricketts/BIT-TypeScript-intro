@@ -23,7 +23,7 @@ class Point{
     }
 
     public distanceFromOrigin():number{
-        return Math.sqrt(this._x*this._x+this._y*this._y);
+        return Math.sqrt(this._x**2+this._y**2);
     }
 
     public translate(x:number, y:number){
@@ -36,7 +36,7 @@ class Point{
     }
 
     public distance(p:Point){
-        return Math.sqrt((p.x - this._x)*(p.x - this._x) + (p.y - this._y)*(p.y - this._y));
+        return Math.sqrt((p.x - this._x)**2 + (p.y - this._y)**2);
         // 8.12 this.x yra p1
     }
     
