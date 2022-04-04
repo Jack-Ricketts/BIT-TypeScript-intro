@@ -4,7 +4,6 @@ class Darbuotojas {
         private _pavarde:string,
         private _atlyginimas:number
     ) {
-
     }
     get vardas(){
         return this._vardas;
