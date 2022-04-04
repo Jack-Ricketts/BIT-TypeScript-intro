@@ -38,6 +38,9 @@ const inpVardas=<HTMLInputElement>document.getElementById("pavadinimas");
 const inpPavarde=<HTMLInputElement>document.getElementById("kaina");
 const inpAlga=<HTMLInputElement>document.getElementById("kiekis");
 const output=document.getElementById("output");
+const gpmSuma=document.getElementById("gpmSuma");
+const psdSuma=document.getElementById("psdSuma");
+const vsdSuma=document.getElementById("vsdSuma");
 
 let darbuotojai:Darbuotojas[]=[];
 
@@ -48,15 +51,27 @@ darbuotojai.push(new Darbuotojas('Zbygnievas', 'Zbygnievaitis', 399));
 console.log(darbuotojai);
 
 let outputDarbuotojai=()=>{
-    if (output!=null){
+    if (output!=null && gpmSuma!=null && psdSuma!=null && vsdSuma!=null){
         output.innerHTML="";
+        let sumaGPM=0;
+        let sumaPSD=0;
+        let sumaVSD=0;
         
         darbuotojai.forEach((darbininkas)=>{
+            sumaGPM+=darbininkas.atlyginimas*0.2;
+            sumaPSD+=darbininkas.atlyginimas*0.0698;
+            sumaVSD+=darbininkas.atlyginimas*0.1252;
             const li=document.createElement("li");
             li.className="list-group-item";
             li.textContent='Vardas: ' + darbininkas.vardas + ", Pavarde: " + darbininkas.pavarde + ", Atlyginimas: "+ darbininkas.atlyginimas;
             output.appendChild(li);
         });
+        let roundedGPM = sumaGPM.toFixed(2);
+        let roundedPSD = sumaPSD.toFixed(2);
+        let roundedVSD = sumaVSD.toFixed(2);
+        gpmSuma.textContent=Number(roundedGPM) +" EUR";
+        psdSuma.textContent=Number(roundedPSD) +" EUR";
+        vsdSuma.textContent=Number(roundedVSD) +" EUR";
     }  
 };
 
