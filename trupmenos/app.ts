@@ -71,18 +71,34 @@ class Trupmena{
     }
     
 }
+ 
 
-const t1=new Trupmena(1,1,2);
-const t2=new Trupmena(2,3,4);
 
-t1.pridetiTrupmena(t2);
-t2.pridetiInt(2);
+class TrupmenaSuGraziuIsvedimu{
+    private _trupmena:Trupmena;
+
+    constructor(
+        private _sveikojiDalis:number,
+        private _skaitiklis:number,
+        private _daliklis:number
+    ){
+        this._trupmena=new Trupmena(_sveikojiDalis,_skaitiklis,_daliklis);
+    }
+
+    public toString(){
+        return this._trupmena.sveikojiDalis+"  sveiki ir  "+this._trupmena.skaitiklis+" / "+this._trupmena.daliklis;
+    }
+}
+
+
+const t1=new Trupmena(1,1,8);
+const t2=new TrupmenaSuGraziuIsvedimu(2,3,4);
+
+/*
+t1.pridetiTrupmena(t2); 
+t2.pridetiInt(3);
 t2.pridetiTrupmena(t1);
-
+*/
 
 console.log(t1.toString());
-
-//t1.skaitiklis=3;
-
-//t1.prideti(0,1,3);
-//console.log(t1.toString());
+console.log(t2.toString());
