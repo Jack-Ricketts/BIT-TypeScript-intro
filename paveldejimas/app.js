@@ -9,10 +9,13 @@ class Gyvunas {
         console.log("Jo amzius yra: " + this._amzius);
         console.log("------------------------------");
     }
+    isveskGyvunoAmziu() {
+        console.log("Amzius: " + this._amzius);
+    }
 }
 class Suo extends Gyvunas {
-    constructor(_vardas, _amzius, _veisle) {
-        super(_vardas, _amzius);
+    constructor(vardas, amzius, _veisle) {
+        super(vardas, amzius);
         this._veisle = _veisle;
     }
     printInfo() {
@@ -30,9 +33,39 @@ class Katinas extends Gyvunas {
         console.log("Gyvuno tipas: katinas");
     }
 }
+class Taksas extends Suo {
+    constructor(vardasikas, amzius, veisle, _ilgis, decibelai) {
+        super(vardasikas, amzius, veisle);
+        this._ilgis = _ilgis;
+        this.decibelai = decibelai;
+    }
+    get vardas() {
+        return this._vardas;
+    }
+    garsas() {
+        console.log("Au Au");
+    }
+}
+class DulkiuSiurblys {
+    constructor(_gamintojas, decibelai) {
+        this._gamintojas = _gamintojas;
+        this.decibelai = decibelai;
+    }
+    garsas() {
+        console.log("buuuuuu");
+    }
+}
+let sugrokDuKartus = (grojikas) => {
+    grojikas.garsas();
+    grojikas.garsas();
+};
 let g1 = new Suo("Brisius", 20, "Kolis");
 let g2 = new Katinas("Murklys", 12);
 let g3 = new Suo("Rudis", 10, "Taksas");
+let g4 = new Taksas("Ilgis", 9, "Taksas", 120, 55);
+g4.garsas();
+sugrokDuKartus(g4);
+g4.isveskGyvunoAmziu();
 //g1.printInfo();
 //g2.printInfo(); 
 let prieglauda = [];

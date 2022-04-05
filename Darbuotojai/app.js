@@ -8,8 +8,11 @@ class Darbuotojas {
     get vardas() {
         return this._vardas;
     }
-    get pavarde() {
-        return this._pavarde;
+    set vardas(vardas) {
+        this._vardas = vardas;
+    }
+    set pavarde(pavarde) {
+        this._pavarde = pavarde;
     }
     get atlyginimas() {
         return this._atlyginimas;
@@ -92,3 +95,25 @@ if (btnIstrinti != null) {
     };
 }
 outputDarbuotojai();
+class PirmaeilisDarbuotojas extends Darbuotojas {
+    constructor(_vardas, _pavarde, _atlyginimas) {
+        super(_vardas, _pavarde, _atlyginimas);
+        this._npd = 0;
+        this.perskaiciuotiNPD();
+    }
+    perskaiciuotiNPD() {
+        if (this.atlyginimas <= 730) {
+            this._npd = 460;
+        }
+        else if (this.atlyginimas <= 1678) {
+            this._npd += 460 - 0.26 * (this.atlyginimas - 730);
+        }
+        else {
+            this._npd += 400 - 0.18 * (this.atlyginimas - 642);
+        }
+    }
+}
+const darb1 = new PirmaeilisDarbuotojas('Darbuotojas', 'Vienas', 400);
+let darbuotojai2 = [];
+darbuotojai2.push(darb1);
+console.log(darb1);

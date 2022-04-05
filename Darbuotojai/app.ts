@@ -6,15 +6,19 @@ class Darbuotojas {
     ) {
 
     }
-    get vardas(){
+    public get vardas(){
         return this._vardas;
     }
 
-    get pavarde(){
-        return this._pavarde;
+    public set vardas(vardas:string){
+        this._vardas=vardas;
     }
 
-    get atlyginimas(){
+    public set pavarde(pavarde:string){
+        this._pavarde=pavarde;
+    }
+
+    public get atlyginimas(){
         return this._atlyginimas;
     }
 
@@ -119,3 +123,42 @@ if (btnIstrinti!=null){
 }
 
 outputDarbuotojai();
+
+class PirmaeilisDarbuotojas extends Darbuotojas{
+    _npd:number = 0;
+    constructor(
+        _vardas:string,
+        _pavarde:string,
+        _atlyginimas:number,
+
+    ){
+        super(_vardas,_pavarde,_atlyginimas);
+        this.perskaiciuotiNPD();
+    }
+
+    private perskaiciuotiNPD(){
+        if(this.atlyginimas <= 730){
+            this._npd = 460;
+        }
+        else if (this.atlyginimas <=1678){
+            this._npd  += 460-0.26*(this.atlyginimas-730);
+        }
+        else {
+            this._npd  += 400-0.18*(this.atlyginimas-642);
+        }
+
+    }
+    
+}
+
+const darb1 = new PirmaeilisDarbuotojas('Darbuotojas', 'Vienas', 400);
+
+let darbuotojai2:PirmaeilisDarbuotojas[]=[];
+
+darbuotojai2.push(darb1);
+
+console.log(darb1);
+
+
+
+
