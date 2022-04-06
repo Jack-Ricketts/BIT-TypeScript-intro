@@ -1,8 +1,8 @@
 class Darbuotojas {
     constructor(
-        private _vardas:string,
-        private _pavarde:string,
-        private _atlyginimas:number
+        protected _vardas:string,
+        protected _pavarde:string,
+        protected _atlyginimas:number
     ) {
 
     }
@@ -14,12 +14,20 @@ class Darbuotojas {
         this._vardas=vardas;
     }
 
+    public get pavarde(){
+        return this._pavarde;
+    }
+
     public set pavarde(pavarde:string){
         this._pavarde=pavarde;
     }
 
     public get atlyginimas(){
         return this._atlyginimas;
+    }
+
+    public set atlyginimas(atlyginimas:number){
+        this._atlyginimas=atlyginimas;
     }
 
     public gpm(){
@@ -33,7 +41,6 @@ class Darbuotojas {
     public vsd(){
         return this._atlyginimas*0.1252;
     }
-
 }
 
 const btnPrideti=document.getElementById("prideti");
@@ -129,16 +136,19 @@ class PirmaeilisDarbuotojas extends Darbuotojas{
     constructor(
         _vardas:string,
         _pavarde:string,
-        _atlyginimas:number,
-
+        _atlyginimas:number
     ){
         super(_vardas,_pavarde,_atlyginimas);
         this.perskaiciuotiNPD();
     }
 
+    public override gpm(){
+        return (this.atlyginimas - this._npd)*0.2;
+    }
+
     private perskaiciuotiNPD(){
         if(this.atlyginimas <= 730){
-            this._npd = 460;
+            this._npd += this.atlyginimas;
         }
         else if (this.atlyginimas <=1678){
             this._npd  += 460-0.26*(this.atlyginimas-730);
@@ -146,19 +156,85 @@ class PirmaeilisDarbuotojas extends Darbuotojas{
         else {
             this._npd  += 400-0.18*(this.atlyginimas-642);
         }
-
     }
-    
 }
-
-const darb1 = new PirmaeilisDarbuotojas('Darbuotojas', 'Vienas', 400);
 
 let darbuotojai2:PirmaeilisDarbuotojas[]=[];
 
-darbuotojai2.push(darb1);
+const darb1 = new PirmaeilisDarbuotojas('Darbuotojas1', 'Vienas', 460);
+const darb2 = new PirmaeilisDarbuotojas('Darbuotojas2', 'Du', 1000);
+const darb3 = new PirmaeilisDarbuotojas('Darbuotojas3', 'Trys', 2000);
 
-console.log(darb1);
+darbuotojai2.push(darb1, darb2, darb3);
 
+console.log(darbuotojai2);
 
+darbuotojai2.forEach((darbuotojas:PirmaeilisDarbuotojas)=>{
+    let gpm=0;
+    gpm+=darbuotojas.gpm();
+    console.log(darbuotojas.vardas + ' mokes: ' + gpm.toFixed(2) + ' GPM ir turi ' + darbuotojas._npd + ' NPD, nes atlyginimas ' + darbuotojas.atlyginimas);
+});
 
+class PraktikantasDarbuotojas extends Darbuotojas {
+    constructor(       
+        _vardas:string,
+        _pavarde:string,
+        _atlyginimas:number = 0
+    ){
+        super(_vardas,_pavarde,_atlyginimas);
+    }
+    public override get vardas(){
+        return this._vardas;
+    }
 
+    public override set vardas(vardas:string){
+        this._vardas=vardas;
+    }
+
+    public override get pavarde(){
+        return this._pavarde;
+    }
+
+    public override set pavarde(pavarde:string){
+        this._pavarde=pavarde;
+    }
+
+    public override get atlyginimas(){
+        return this._atlyginimas;
+    }
+
+    public override set atlyginimas(atlyginimas:number){
+        this._atlyginimas=atlyginimas;
+    }
+
+    public override gpm(){
+        return this._atlyginimas*0;
+    }
+
+    public override psd(){
+        return this._atlyginimas*0;
+    }
+
+    public override vsd(){
+        return this._atlyginimas*0;
+    }
+}
+
+let darbuotojai3:PraktikantasDarbuotojas[]=[];
+
+const prak1 = new PraktikantasDarbuotojas('Praktikantas1', 'Vienas');
+const prak2 = new PraktikantasDarbuotojas('Praktikantas2', 'Vienas');
+
+darbuotojai3.push(prak1, prak2);
+
+console.log(darbuotojai3);
+
+darbuotojai3.forEach((darbuotojas:PraktikantasDarbuotojas)=>{
+    let gpm=0;
+    let psd=0;
+    let vsd=0;
+    gpm+=darbuotojas.gpm();
+    psd+=darbuotojas.psd();
+    vsd+=darbuotojas.vsd();
+    console.log(darbuotojas.vardas + ' mokes: ' + psd + ' PSD ' + vsd + ' VSD ir ' + gpm + ' GPM, nes uzdirba ' + darbuotojas.atlyginimas);
+});

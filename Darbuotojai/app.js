@@ -11,11 +11,17 @@ class Darbuotojas {
     set vardas(vardas) {
         this._vardas = vardas;
     }
+    get pavarde() {
+        return this._pavarde;
+    }
     set pavarde(pavarde) {
         this._pavarde = pavarde;
     }
     get atlyginimas() {
         return this._atlyginimas;
+    }
+    set atlyginimas(atlyginimas) {
+        this._atlyginimas = atlyginimas;
     }
     gpm() {
         return this._atlyginimas * 0.2;
@@ -101,9 +107,12 @@ class PirmaeilisDarbuotojas extends Darbuotojas {
         this._npd = 0;
         this.perskaiciuotiNPD();
     }
+    gpm() {
+        return (this.atlyginimas - this._npd) * 0.2;
+    }
     perskaiciuotiNPD() {
         if (this.atlyginimas <= 730) {
-            this._npd = 460;
+            this._npd += this.atlyginimas;
         }
         else if (this.atlyginimas <= 1678) {
             this._npd += 460 - 0.26 * (this.atlyginimas - 730);
@@ -113,7 +122,60 @@ class PirmaeilisDarbuotojas extends Darbuotojas {
         }
     }
 }
-const darb1 = new PirmaeilisDarbuotojas('Darbuotojas', 'Vienas', 400);
 let darbuotojai2 = [];
-darbuotojai2.push(darb1);
-console.log(darb1);
+const darb1 = new PirmaeilisDarbuotojas('Darbuotojas1', 'Vienas', 460);
+const darb2 = new PirmaeilisDarbuotojas('Darbuotojas2', 'Du', 1000);
+const darb3 = new PirmaeilisDarbuotojas('Darbuotojas3', 'Trys', 2000);
+darbuotojai2.push(darb1, darb2, darb3);
+console.log(darbuotojai2);
+darbuotojai2.forEach((darbuotojas) => {
+    let gpm = 0;
+    gpm += darbuotojas.gpm();
+    console.log(darbuotojas.vardas + ' mokes: ' + gpm.toFixed(2) + ' GPM ir turi ' + darbuotojas._npd + ' NPD, nes atlyginimas ' + darbuotojas.atlyginimas);
+});
+class PraktikantasDarbuotojas extends Darbuotojas {
+    constructor(_vardas, _pavarde, _atlyginimas = 0) {
+        super(_vardas, _pavarde, _atlyginimas);
+    }
+    get vardas() {
+        return this._vardas;
+    }
+    set vardas(vardas) {
+        this._vardas = vardas;
+    }
+    get pavarde() {
+        return this._pavarde;
+    }
+    set pavarde(pavarde) {
+        this._pavarde = pavarde;
+    }
+    get atlyginimas() {
+        return this._atlyginimas;
+    }
+    set atlyginimas(atlyginimas) {
+        this._atlyginimas = atlyginimas;
+    }
+    gpm() {
+        return this._atlyginimas * 0;
+    }
+    psd() {
+        return this._atlyginimas * 0;
+    }
+    vsd() {
+        return this._atlyginimas * 0;
+    }
+}
+let darbuotojai3 = [];
+const prak1 = new PraktikantasDarbuotojas('Praktikantas1', 'Vienas');
+const prak2 = new PraktikantasDarbuotojas('Praktikantas2', 'Vienas');
+darbuotojai3.push(prak1, prak2);
+console.log(darbuotojai3);
+darbuotojai3.forEach((darbuotojas) => {
+    let gpm = 0;
+    let psd = 0;
+    let vsd = 0;
+    gpm += darbuotojas.gpm();
+    psd += darbuotojas.psd();
+    vsd += darbuotojas.vsd();
+    console.log(darbuotojas.vardas + ' mokes: ' + psd + ' PSD ' + vsd + ' VSD ir ' + gpm + ' GPM, nes uzdirba ' + darbuotojas.atlyginimas);
+});
